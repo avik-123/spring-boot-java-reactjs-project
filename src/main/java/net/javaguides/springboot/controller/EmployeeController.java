@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/employees")
@@ -18,6 +20,8 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    private static final Logger logger = Logger.getLogger(EmployeeController.class.getName());
 
     @GetMapping
     public List<Employee> getAllEmployees() {
@@ -28,6 +32,7 @@ public class EmployeeController {
     //build create employee RESt API
     @PostMapping
     public Employee createEmployee(@RequestBody Employee employee){
+        logger.info("New Employee created successfully.");
         return employeeRepository.save(employee);
     }
 
